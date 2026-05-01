@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Learning Lab | DBMS Practical</title>
+    <meta name="description"
+        content="Interactive DBMS Query Learning Dashboard - Practice DDL, DML, Joins, Triggers and more with live simulated results and theory explanations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Animated Background Particles -->
+    <div class="bg-particles" id="bgParticles"></div>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <ellipse cx="14" cy="8" rx="12" ry="5" stroke="currentColor" stroke-width="2" fill="none" />
+                    <path d="M2 8v6c0 2.76 5.37 5 12 5s12-2.24 12-5V8" stroke="currentColor" stroke-width="2"
+                        fill="none" />
+                    <path d="M2 14v6c0 2.76 5.37 5 12 5s12-2.24 12-5v-6" stroke="currentColor" stroke-width="2"
+                        fill="none" />
+                </svg>
+            </div>
+            <div class="logo-text">
+                <h1>SQL Learning Lab</h1>
+                <span class="logo-subtitle">DBMS Practical Dashboard</span>
+            </div>
+        </div>
+        <div class="top-bar-right">
+            <div class="db-status" id="dbStatus">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Checking...</span>
+            </div>
+            <button class="btn-reset" id="btnResetAll" title="Reset Database">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path
+                        d="M8 1a7 7 0 0 0-7 7h2a5 5 0 0 1 9.17-2.74L10 7h5V2l-1.93 1.93A6.98 6.98 0 0 0 8 1zM1 9v5l1.93-1.93A6.98 6.98 0 0 0 8 15a7 7 0 0 0 7-7h-2a5 5 0 0 1-9.17 2.74L6 9H1z" />
+                </svg>
+                Reset DB
+            </button>
+        </div>
+    </header>
+
+    <main class="app-layout">
+
+        <!-- Left Sidebar - Categories & Commands -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>SQL Commands</h2>
+                <p>Select a category to explore</p>
+            </div>
+
+            <nav class="category-list" id="categoryList">
+                <!-- Category 1: DDL -->
+                <div class="category-group" data-category="ddl">
+                    <button class="category-btn " data-cat="ddl">
+
+                        <span class="cat-label">DDL Queries</span>
+                        <span class="cat-badge">5</span>
+                        <svg class="chevron" width="14" height="14" viewBox="0 0 14 14">
+                            <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" />
+                        </svg>
+                    </button>
+                    <div class="command-list open">
+                        <button class="cmd-btn" data-cmd="create_table">CREATE TABLE</button>
+                        <button class="cmd-btn" data-cmd="alter_add">ALTER TABLE (ADD)</button>
+                        <button class="cmd-btn" data-cmd="alter_modify">ALTER TABLE (MODIFY)</button>
+                        <button class="cmd-btn" data-cmd="alter_drop">ALTER TABLE (DROP COL)</button>
+                        <button class="cmd-btn" data-cmd="drop_table">DROP TABLE</button>
+                        <button class="cmd-btn" data-cmd="truncate">TRUNCATE TABLE</button>
+                    </div>
+                </div>
+
+                <!-- Category 2: DML -->
+                <div class="category-group" data-category="dml">
+                    <button class="category-btn" data-cat="dml">
+
+                        <span class="cat-label">DML Queries</span>
+                        <span class="cat-badge">4</span>
+                        <svg class="chevron" width="14" height="14" viewBox="0 0 14 14">
+                            <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" />
+                        </svg>
+                    </button>
+                    <div class="command-list">
+                        <button class="cmd-btn" data-cmd="insert">INSERT INTO</button>
+                        <button class="cmd-btn" data-cmd="select">SELECT</button>
+                        <button class="cmd-btn" data-cmd="update">UPDATE</button>
+                        <button class="cmd-btn" data-cmd="delete">DELETE</button>
+                    </div>
+                </div>
+
+                <!-- Category 3: Integrity Constraints -->
+                <div class="category-group" data-category="constraints">
+                    <button class="category-btn" data-cat="constraints">
+
+                        <span class="cat-label">Integrity Constraints</span>
+                        <span class="cat-badge">6</span>
+                        <svg class="chevron" width="14" height="14" viewBox="0 0 14 14">
+                            <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" />
+                        </svg>
+                    </button>
+                    <div class="command-list">
+                        <button class="cmd-btn" data-cmd="primary_key">PRIMARY KEY</button>
+                        <button class="cmd-btn" data-cmd="foreign_key">FOREIGN KEY</button>
+                        <button class="cmd-btn" data-cmd="not_null">NOT NULL</button>
+                        <button class="cmd-btn" data-cmd="unique_const">UNIQUE</button>
+                        <button class="cmd-btn" data-cmd="check_const">CHECK</button>
+                        <button class="cmd-btn" data-cmd="default_const">DEFAULT</button>
+                    </div>
+                </div>
+
+                <!-- Category 4: Joins -->
+                <div class="category-group" data-category="joins">
+                    <button class="category-btn" data-cat="joins">
+
+                        <span class="cat-label">Joins (All Types)</span>
+                        <span class="cat-badge">5</span>
+                        <svg class="chevron" width="14" height="14" viewBox="0 0 14 14">
+                            <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" />
+                        </svg>
+                    </button>
+                    <div class="command-list">
+                        <button class="cmd-btn" data-cmd="inner_join">INNER JOIN</button>
+                        <button class="cmd-btn" data-cmd="left_join">LEFT JOIN</button>
+                        <button class="cmd-btn" data-cmd="right_join">RIGHT JOIN</button>
+                        <button class="cmd-btn" data-cmd="full_join">FULL OUTER JOIN</button>
+                        <button class="cmd-btn" data-cmd="cross_join">CROSS JOIN</button>
+                        <button class="cmd-btn" data-cmd="self_join">SELF JOIN</button>
+                    </div>
+                </div>
+
+                <!-- Category 5: Index, View, Cursors -->
+                <div class="category-group" data-category="index_view">
+                    <button class="category-btn" data-cat="index_view">
+
+                        <span class="cat-label">Index, View & Cursors</span>
+                        <span class="cat-badge">5</span>
+                        <svg class="chevron" width="14" height="14" viewBox="0 0 14 14">
+                            <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" />
+                        </svg>
+                    </button>
+                    <div class="command-list">
+                        <button class="cmd-btn" data-cmd="create_index">CREATE INDEX</button>
+                        <button class="cmd-btn" data-cmd="drop_index">DROP INDEX</button>
+                        <button class="cmd-btn" data-cmd="create_view">CREATE VIEW</button>
+                        <button class="cmd-btn" data-cmd="drop_view">DROP VIEW</button>
+                        <button class="cmd-btn" data-cmd="cursor_demo">CURSOR (Demo)</button>
+                    </div>
+                </div>
+
+                <!-- Category 6: Set Operators -->
+                <div class="category-group" data-category="set_ops">
+                    <button class="category-btn" data-cat="set_ops">
+
+                        <span class="cat-label">ANY, ALL, IN, EXISTS, UNION</span>
+                        <span class="cat-badge">5</span>
+                        <svg class="chevron" width="14" height="14" viewBox="0 0 14 14">
+                            <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" />
+                        </svg>
+                    </button>
+                    <div class="command-list">
+                        <button class="cmd-btn" data-cmd="op_any">ANY</button>
+                        <button class="cmd-btn" data-cmd="op_all">ALL</button>
+                        <button class="cmd-btn" data-cmd="op_in">IN</button>
+                        <button class="cmd-btn" data-cmd="op_exists">EXISTS</button>
+                        <button class="cmd-btn" data-cmd="op_union">UNION / UNION ALL</button>
+                    </div>
+                </div>
+
+                <!-- Category 7: Triggers -->
+                <div class="category-group" data-category="triggers">
+                    <button class="category-btn" data-cat="triggers">
+
+                        <span class="cat-label">Triggers</span>
+                        <span class="cat-badge">3</span>
+                        <svg class="chevron" width="14" height="14" viewBox="0 0 14 14">
+                            <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="2" fill="none" />
+                        </svg>
+                    </button>
+                    <div class="command-list">
+                        <button class="cmd-btn" data-cmd="trigger_insert">TRIGGER (INSERT)</button>
+                        <button class="cmd-btn" data-cmd="trigger_update">TRIGGER (UPDATE)</button>
+                        <button class="cmd-btn" data-cmd="trigger_delete">TRIGGER (DELETE)</button>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Center Panel - Editor & Results -->
+        <section class="main-panel">
+
+            <!-- Current Database Tables Preview -->
+            <div class="tables-preview" id="tablesPreview">
+                <div class="section-header">
+
+                    <div class="table-tabs" id="tableTabs">
+                        <button class="table-tab active" data-table="students">Students</button>
+                        <button class="table-tab" data-table="courses">Courses</button>
+                        <button class="table-tab" data-table="enrollments">Enrollments</button>
+                    </div>
+                </div>
+                <div class="table-container" id="currentTableDisplay">
+                    <!-- Table rendered by JS -->
+                </div>
+            </div>
+
+            <!-- SQL Editor -->
+            <div class="editor-section">
+                <div class="editor-header">
+                    <div class="editor-title">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+                            <path d="M2 4h14v2H2V4zm0 4h10v2H2V8zm0 4h14v2H2v-2z" />
+                        </svg>
+                        <span>SQL Query Editor</span>
+                    </div>
+                    <div class="editor-actions">
+                        <button class="btn-run" id="btnRun" title="Execute Query (Ctrl+Enter)">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M4 2l10 6-10 6V2z" />
+                            </svg>
+                            Run Query
+                        </button>
+                        <button class="btn-clear" id="btnClear" title="Clear Editor">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                                <path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="editor-body">
+                    <div class="line-numbers" id="lineNumbers">1</div>
+                    <textarea id="sqlEditor" class="sql-editor"
+                        placeholder="-- Type your SQL query here or select a command from the sidebar..."
+                        spellcheck="false"></textarea>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-section" id="resultsSection">
+                <div class="results-header">
+                    <div class="results-title">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+                            <path
+                                d="M9 1l2.39 4.84L17 6.69l-4 3.9.94 5.51L9 13.63l-4.94 2.47.94-5.51-4-3.9 5.61-.85L9 1z" />
+                        </svg>
+                        <span>Query Result</span>
+                    </div>
+                    <div class="results-meta" id="resultsMeta"></div>
+                </div>
+                <div class="results-body" id="resultsBody">
+                    <div class="results-placeholder">
+                        <div class="placeholder-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <rect x="6" y="10" width="36" height="28" rx="3" />
+                                <line x1="6" y1="18" x2="42" y2="18" />
+                                <line x1="6" y1="26" x2="42" y2="26" />
+                                <line x1="6" y1="34" x2="42" y2="34" />
+                                <line x1="18" y1="10" x2="18" y2="38" />
+                                <line x1="30" y1="10" x2="30" y2="38" />
+                            </svg>
+                        </div>
+                        <p>Select a command or write a query to see results here</p>
+                        <span class="placeholder-hint">Use Ctrl + Enter to execute</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Panel - Theory & Explanation -->
+        <aside class="theory-panel" id="theoryPanel">
+            <div class="theory-header">
+                <h3> Theory & Explanation</h3>
+            </div>
+            <div class="theory-body" id="theoryBody">
+                <div class="theory-welcome">
+
+                    <h4>Welcome to SQL Learning Lab!</h4>
+                    <p>Select a command from the sidebar to see its theory, syntax, and explanation.</p>
+                    <div class="theory-tips">
+                        <div class="tip-card">
+                            <span class="tip-num">1</span>
+                            <span>Pick a category from the left sidebar</span>
+                        </div>
+                        <div class="tip-card">
+                            <span class="tip-num">2</span>
+                            <span>Click a command to auto-fill the editor</span>
+                        </div>
+                        <div class="tip-card">
+                            <span class="tip-num">3</span>
+                            <span>Click "Run Query" or press Ctrl+Enter</span>
+                        </div>
+                        <div class="tip-card">
+                            <span class="tip-num">4</span>
+                            <span>View results & learn the theory here!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

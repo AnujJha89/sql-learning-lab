@@ -1,0 +1,23 @@
+{
+  "name": "dbms-learning-lab",
+  "version": "1.0.0",
+  "description": "SQL Learning Lab - DBMS Practical Dashboard with MongoDB persistence",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^4.22.1",
+    "mongodb-memory-server": "^10.4.0",
+    "mongoose": "^8.4.0",
+    "mysql2": "^3.22.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {}
+}
