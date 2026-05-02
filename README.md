@@ -4,7 +4,7 @@ An interactive SQL learning platform with real-time query execution and theory.
 
 ---
 
-## 🚀 Features
+##  Features
 - SQL Query Editor
 - Real-time execution
 - Theory panel
@@ -13,14 +13,14 @@ An interactive SQL learning platform with real-time query execution and theory.
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 - HTML, CSS, JavaScript
 - Node.js, Express
 - MySQL
 
 ---
 
-## ⚙️ Installation & Setup
+##  Installation & Setup
 
 ### 1. Clone the repository
 git clone https://github.com/AnujJha89/sql-learning-lab.git
@@ -41,11 +41,11 @@ DB_NAME=dbms_lab
 node server.cjs
 
 ### 6. Open in browser
-http://localhost:5000
+
 
 ---
 
-## 📦 Dependencies
+##  Dependencies
 - express
 - mysql2
 - cors
